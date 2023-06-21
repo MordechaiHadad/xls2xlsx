@@ -10,13 +10,6 @@ install_dependencies:
     - source venv/bin/activate
     - pip install -r requirements.txt
     - pip install pyinstaller
-  artifacts:
-    paths:
-      - venv/
-
-build_executable:
-  stage: build
-  script:
     - pyinstaller main.spec
   artifacts:
     paths:

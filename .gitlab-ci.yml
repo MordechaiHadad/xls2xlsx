@@ -1,0 +1,25 @@
+image: python:3.8
+
+stages:
+  - build
+
+install_dependencies:
+  stage: build
+  script:
+    - pip install virtualenv
+    - virtualenv venv
+    - source venv/bin/activate
+    - pip install -r requirements.txt
+    - pip install pyinstaller
+  artifacts:
+    paths:
+      - venv/
+
+build_executable:
+  stage: build
+  script:
+    - source venv/bin/activate
+    - pyinstaller main.spec
+  artifacts:
+    paths:
+      - dist/

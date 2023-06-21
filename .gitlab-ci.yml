@@ -3,7 +3,7 @@ image: python:3.8
 stages:
   - build
 
-install_dependencies:
+build_package:
   stage: build
   script:
     - python -m venv venv

@@ -6,8 +6,7 @@ stages:
 install_dependencies:
   stage: build
   script:
-    - pip install virtualenv
-    - virtualenv venv
+    - python -m venv venv
     - source venv/bin/activate
     - pip install -r requirements.txt
     - pip install pyinstaller
@@ -18,7 +17,6 @@ install_dependencies:
 build_executable:
   stage: build
   script:
-    - source venv/bin/activate
     - pyinstaller main.spec
   artifacts:
     paths:

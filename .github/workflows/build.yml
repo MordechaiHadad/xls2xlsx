@@ -6,12 +6,8 @@ on:
       - master
 
 jobs:
-  build:
-    strategy:
-      matrix:
-        platform: [ubuntu-latest, windows-latest, macOS-latest]
-
-    runs-on: ${{ matrix.platform }}
+  build_unix:
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
@@ -27,11 +23,7 @@ jobs:
 
       - name: Activate virtual environment and install dependencies
         run: |
-          if ($Env:matrix_platform -eq "windows-latest") {
-            .\venv\Scripts\Activate.ps1
-          } else {
-            source venv/bin/activate
-          }
+          source venv/bin/activate
           pip install -r requirements.txt
 
       - name: Install PyInstaller
@@ -43,5 +35,69 @@ jobs:
       - name: Archive artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: dist
+          name: xls2xlsx-ubuntu.zip
+          path: dist/
+
+  build_windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Create virtual environment
+        run: python -m venv venv
+
+      - name: Activate virtual environment and install dependencies
+        run: |
+          .\venv\Scripts\Activate.ps1
+          pip install -r requirements.txt
+
+      - name: Install PyInstaller
+        run: pip install pyinstaller
+
+      - name: Build package
+        run: pyinstaller main.spec
+
+      - name: Archive artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: xls2xlsx-windows.zip
+          path: dist/
+
+  build_macos:
+    runs-on: macOS-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Create virtual environment
+        run: python -m venv venv
+
+      - name: Activate virtual environment and install dependencies
+        run: |
+          source venv/bin/activate
+          pip install -r requirements.txt
+
+      - name: Install PyInstaller
+        run: pip install pyinstaller
+
+      - name: Build package
+        run: pyinstaller main.spec
+
+      - name: Archive artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: xls2xlsx-macos.zip
           path: dist/

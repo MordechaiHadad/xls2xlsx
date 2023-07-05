@@ -22,10 +22,16 @@ jobs:
         with:
           python-version: 3.8
 
-      - name: Install dependencies
+      - name: Create virtual environment
+        run: python -m venv venv
+
+      - name: Activate virtual environment and install dependencies
         run: |
-          python -m venv venv
-          ${{ if eq(matrix.platform, 'windows-latest') }}venv\Scripts\activate.bat${{ else }}source venv/bin/activate${{ endif }}
+          if [ "${{ matrix.platform }}" == "windows-latest" ]; then
+            .\venv\Scripts\activate.bat
+          else
+            source venv/bin/activate
+          fi
           pip install -r requirements.txt
 
       - name: Install PyInstaller

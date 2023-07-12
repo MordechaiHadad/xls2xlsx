@@ -61,6 +61,9 @@ jobs:
       - name: Install pyinstaller
         run: pip install pyinstaller
 
+      - name: test
+        run: pip list
+
       - name: Build package
         run: pyinstaller main.spec
 

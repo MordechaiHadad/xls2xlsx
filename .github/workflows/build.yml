@@ -36,7 +36,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: xls2xlsx-ubuntu.zip
-          path: ./main
+          path: ./main.bin
 
   build_windows:
     runs-on: windows-latest
@@ -68,7 +68,9 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: xls2xlsx-windows.zip
-          path: ./main.exe
+          path: |
+            main.exe
+            main.cmd
 
   build_macos:
     runs-on: macOS-latest
@@ -100,4 +102,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: xls2xlsx-macos.zip
-          path: ./main
+          path: ./main.bin

@@ -1,5 +1,6 @@
-/build
-/dist
 /venv
 *.xls
 *.xlsx
+/main.build
+*.cmd
+*.exe

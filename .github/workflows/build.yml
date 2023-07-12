@@ -35,7 +35,7 @@ jobs:
       - name: Archive artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: xls2xlsx-ubuntu.zip
+          name: xls2xlsx-linux
           path: ./main.bin
 
   build_windows:
@@ -67,7 +67,7 @@ jobs:
       - name: Archive artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: xls2xlsx-windows.zip
+          name: xls2xlsx-windows
           path: |
             main.exe
             main.cmd
@@ -101,5 +101,5 @@ jobs:
       - name: Archive artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: xls2xlsx-macos.zip
+          name: xls2xlsx-macos
           path: ./main.bin

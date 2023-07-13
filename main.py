@@ -30,6 +30,7 @@ def main():
     args = parser.parse_args()
 
     input_file_path = args.input_file
+    print(input_file_path)
     output_file_path = args.output_file
 
     convert(input_file_path, output_file_path)
